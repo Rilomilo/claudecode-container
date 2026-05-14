@@ -106,7 +106,7 @@ Make sure your host's proxy software is listening on `0.0.0.0:7890` (not only `1
 If you'd rather build the image yourself instead of pulling from Docker Hub:
 
 ```bash
-git clone <this-repo>
+git clone https://github.com/Rilomilo/claudecode-container
 cd claudecode
 docker build -t claudecode-agent:latest .
 ```
