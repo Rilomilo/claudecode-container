@@ -1,0 +1,21 @@
+services:
+  claudecode:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: claudecode-agent:latest
+    container_name: claudecode-agent
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - .env
+    environment:
+      - IS_SANDBOX=1
+    volumes:
+      - ./.claude.json:/home/claude/.claude.json
+      - ./.claude:/home/claude/.claude
+      - ./workspace:/workspace
+    command: ["remote-control", "--permission-mode", "bypassPermissions", "--name", "skytree"]
+        
+    stdin_open: true
+    tty: true
