@@ -11,11 +11,12 @@ services:
       - .env
     environment:
       - IS_SANDBOX=1
+      - CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=true
     volumes:
       - ./.claude.json:/home/claude/.claude.json
       - ./.claude:/home/claude/.claude
       - ./workspace:/workspace
-    command: ["remote-control", "--permission-mode", "bypassPermissions", "--name", "skytree"]
-        
+    command: ["remote-control", "--permission-mode", "bypassPermissions", "--remote-control-session-name-prefix", "skytree"]
+    restart: unless-stopped
     stdin_open: true
     tty: true

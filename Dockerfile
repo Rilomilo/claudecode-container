@@ -26,6 +26,12 @@ RUN apt-get update && apt-get install -y \
 RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y nodejs
 
+# Install Bun runtime (system-wide)
+ENV BUN_INSTALL=/usr/local/bun
+ENV PATH=$BUN_INSTALL/bin:$PATH
+RUN curl -fsSL https://bun.sh/install | bash \
+    && chmod -R a+rx /usr/local/bun
+
 # Install common global npm packages
 RUN npm install -g \
     typescript \
@@ -34,7 +40,8 @@ RUN npm install -g \
     prettier \
     pnpm \
     yarn \
-    http-server
+    http-server \
+    wrangler
 
 # Install common Python packages
 RUN pip3 install --break-system-packages \
